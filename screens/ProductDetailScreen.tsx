@@ -1,14 +1,13 @@
 import { useProducts } from '@/context/ProductContext';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { useLocalSearchParams } from 'expo-router';
 import React from 'react'
 import { Image, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const ProductDetailScreen = ({route}: any) => {
- 
-    const {id} = route.params;
+const ProductDetailScreen = () => {
+    const { id } = useLocalSearchParams();
     const {products} = useProducts();
-    const product = products.find((p) => p.id == id);
+    const product = products.find((p) => p.id == Number(id));
 
     if (!product) {
         return <Text>No Product Found</Text>
